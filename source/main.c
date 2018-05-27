@@ -2834,7 +2834,7 @@ static boolean show_bootinf;
 void bootinf(char *s)
 {
   if (!show_bootinf) return;
-  printf(s);
+  printf("%s", s);
   fflush(0);
 }
 
