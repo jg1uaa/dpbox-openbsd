@@ -2488,7 +2488,8 @@ static void new_entry(short unr, char *dname1_, char *status_, char *betreff1,
   boolean	ack_requested, compress, is_html, dirty, part, db, ok, usersf;
   boolean	hmbxiscall, dirtys, ugzip, is_broken;
   long		nsize, psize, bct, lastpos1, lastpos2, sv, hsize, rs, li;
-  long		chargedate, txdate1, lesezeiger1;
+  long		lesezeiger1;
+  time_t	chargedate, txdate1;
   boolean	wpupdate, outdated, reject_it, hold_it, dbimport, dbimpfilter;
   boolean     	wprotupdate, direct_sf;
   char		*nmem, *puffer;
@@ -3323,7 +3324,7 @@ static void new_entry(short unr, char *dname1_, char *status_, char *betreff1,
 #undef blocksize
 
 
-static void get_fbbdatime(char *zs, long *date)
+static void get_fbbdatime(char *zs, time_t *date)
 {
   char	    d, m, y, h, min, s;
   short     x;
