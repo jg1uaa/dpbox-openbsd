@@ -4295,18 +4295,16 @@ void begruessung(short unr)
   wuser(unr, " UTC   Logins: ");
   sprintf(hs, "%d", actual_connects());
   wlnuser(unr, hs);
-#ifdef __NetBSD__
+#if defined(__NetBSD__)
   sprintf(w, "dpbox (NetBSD) v%s%s", dp_vnr, dp_vnr_sub);
-#else
-  #ifdef __linux__
+#elif defined(__OpenBSD__)
+  sprintf(w, "dpbox (OpenBSD) v%s%s", dp_vnr, dp_vnr_sub);
+#elif defined(__linux__)
   sprintf(w, "dpbox (Linux) v%s%s", dp_vnr, dp_vnr_sub);
-  #else 
-    #ifdef __macos__
+#elif defined(__macos__)
   sprintf(w, "dpbox (MacOS) v%s%s", dp_vnr, dp_vnr_sub);
-    #else
+#else
   sprintf(w, "dpbox v%s%s", dp_vnr, dp_vnr_sub);
-    #endif
-  #endif
 #endif
   wlnuser(unr, w);
 
@@ -4690,18 +4688,16 @@ static void mkf_cmd(short unr, char *eingabe)
     return;
   }
 
-#ifdef __NetBSD__
+#if defined(__NetBSD__)
   sprintf(hs, "FMAIL / dpbox (NetBSD) v%s%s", dp_vnr, dp_vnr_sub);
-#else
-  #ifdef __linux__
+#elif defined(__OpenBSD__)
+  sprintf(hs, "FMAIL / dpbox (OpenBSD) v%s%s", dp_vnr, dp_vnr_sub);
+#elif defined(__linux__)
   sprintf(hs, "FMAIL / dpbox (Linux) v%s%s", dp_vnr, dp_vnr_sub);
-  #else
-    #ifdef __macos__
+#elif defined(__macos__)
   sprintf(hs, "FMAIL / dpbox (MacOS) v%s%s", dp_vnr, dp_vnr_sub);
-    #else
+#else
   sprintf(hs, "FMAIL / dpbox v%s%s", dp_vnr, dp_vnr_sub);
-    #endif
-  #endif
 #endif
   wlnuser(unr, hs);
   send_text3(unr, true, hs, true);
