@@ -508,7 +508,7 @@ void par_l(short unr, const char *par, long value)
 
 static void calc_timestring(time_t seconds, char *hs)
 {
-  sprintf(hs, "%ld h %ld min %ld", seconds / 3600, seconds % 3600 / 60, seconds % 60);
+  sprintf(hs, "%"PRId64" h %"PRId64" min %"PRId64, seconds / 3600, seconds % 3600 / 60, seconds % 60);
 }
 
 
@@ -530,7 +530,7 @@ void show_stat(short unr, short x)
   seconds1	= WITH->processtime / 200;
   seconds2	= (WITH->processtime % 200) >> 1;
   calc_timestring(seconds1, w);
-  sprintf(hs, "CPU-Time    : %s.%.2ld sec", w, seconds2);
+  sprintf(hs, "CPU-Time    : %s.%.2"PRId64" sec", w, seconds2);
   wlnuser(unr, hs);
   sprintf(hs, "Bytecount   : RX %ld / TX %ld", WITH->rbytes, WITH->sbytes);
   wlnuser(unr, hs);
@@ -538,7 +538,7 @@ void show_stat(short unr, short x)
     seconds0	= 1;
   if (seconds1 < 1)
     seconds1	= 1;
-  sprintf(hs, "Speed       : %ld bps (HF) / %ld bps (CPU)",
+  sprintf(hs, "Speed       : %"PRId64" bps (HF) / %"PRId64" bps (CPU)",
 		(WITH->rbytes + WITH->sbytes) * 8 / seconds0,
 		(WITH->rbytes + WITH->sbytes) * 8 / seconds1);
   wlnuser(unr, hs);
@@ -965,7 +965,7 @@ void set_password(short unr, boolean superv, char *eingabe_)
     }
   } else if (ufil.pwmode != 0 || user[unr]->pchan > 0 ||
 	     user[unr]->console != false) {
-    sprintf(w, "%d", strlen(ufil.password));
+    sprintf(w, "%zu", strlen(ufil.password));
     w_btext(unr, 144);
     chwuser(unr, 32);
     wlnuser(unr, w);
@@ -1492,7 +1492,7 @@ void change_mybbs(short unr, char *callx_, char *bbs_, long updatetime,
 	if (!update) { /* hmm... that's ok. This is for locally entered infos (21.01.2000) */
 	  get_word(uname, w); /* sorry, but WP only accepts one word for the name */
 	  if (!*w) strcpy(w, "?");
-      	  snprintf(hs, 255, "M @ %s < %s $%s %s %ld ? %s ?",
+      	  snprintf(hs, 255, "M @ %s < %s $%s %s %"PRId64" ? %s ?",
       	      	    e_m_verteiler, callx, WPDUMMYBID, bbs, updatetime+1, w);
       	  sf_rx_emt1(hs, Console_call);
 	}
