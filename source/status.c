@@ -27,7 +27,7 @@
 #include <utsname.h>
 #endif
 
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__OpenBSD__)
 #include <sys/utsname.h>
 #include <sys/param.h>
 #include <sys/sysctl.h>
@@ -110,7 +110,7 @@ long get_sysruntime(void)
   static time_t lastsysrunt	= 0;
   static time_t lastsysrunres	= 0;
 
-#ifndef __NetBSD__
+#ifdef __linux__
   short k;
   char hs[256], w[256];
   short x, y;
@@ -145,7 +145,7 @@ void get_sysload(char *s)
   static time_t lastsysltime	= 0;
   static char lastsysload[21]	= "";
 
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__OpenBSD__)
   double loadavg[3];
 #else
   short k;
@@ -185,7 +185,7 @@ void get_sysload(char *s)
 
   } else
 #endif
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__OpenBSD__)
   if (getloadavg(loadavg, 3))
     sprintf(s,"load averages: %.2f%%, %.2f%%, %.2f%%\n",
             loadavg[0], loadavg[1], loadavg[2]);
@@ -205,7 +205,7 @@ void get_cpuinf(char *cpu, char *bmips)
 
   short k;
   char *hp;
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__OpenBSD__)
   int mib[2];
   size_t len;
 #else
@@ -250,7 +250,7 @@ void get_cpuinf(char *cpu, char *bmips)
     strcpy(lastcputype, &hs[1]);
   } 
 #endif
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__OpenBSD__)
     mib[0] = CTL_HW;
     mib[1] = HW_MODEL;
     sysctl(mib, 2, NULL, &len, NULL, 0);
@@ -303,7 +303,7 @@ void get_linpack(char *s)
 
 void get_sysversion(char *s)
 {
-#if defined(__macos__) || defined(__NetBSD__)
+#ifndef __linux__
   struct utsname name;
 
   strcpy(s, "?");
@@ -391,14 +391,14 @@ void get_status(boolean sysop, char **p, long *sz)
   sprintf(hs,"dpbox v%s%s, %s, (c) DL8HBS, Joachim Schurig                       ",
               dp_vnr, dp_vnr_sub, dp_date);
   pl(hs);
-#ifdef __macos__
+#if defined(__macos__)
   pl("parts of code (c) DL4YBG, Mark Wahl");
-#endif
-#ifdef __linux__
+#elif defined(__linux__)
   pl("Linux porting (c) DL4YBG, Mark Wahl");
-#endif
-#ifdef __NetBSD__
+#elif defined(__NetBSD__)
   pl("NetBSD porting (c) VK5ABN, Berndt Josef Wulf");
+#elif defined(__OpenBSD__)
+  pl("OpenBSD porting (c) JG1UAA, Sasano Takayoshi");
 #endif
   pl("");
 
