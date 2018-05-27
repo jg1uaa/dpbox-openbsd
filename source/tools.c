@@ -174,7 +174,7 @@ short call_prg(char *prog, char *par, char *redir)
 #ifdef __macos__
   return (status);
 #endif
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
   return (statusconvert(status));
 #endif
 }
