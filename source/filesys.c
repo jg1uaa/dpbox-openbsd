@@ -11,7 +11,7 @@
 #include "filesys.h"
 
 #include <unistd.h>
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__OpenBSD__)
 #include <sys/param.h>
 #include <sys/mount.h>
 #endif
@@ -399,7 +399,7 @@ short sfremovedir(char *name)
 
 
 
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
 
 /* simply copied that widespread file access code of former dpbox code  */
 /* in this single file. Not a real change to previous versions of the   */
@@ -1523,7 +1523,7 @@ void _filesys_init(void)
 #ifdef __macos__
   StartupFilesysInit();
 #endif
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
   nextptr = NULL;
 #endif
 }
