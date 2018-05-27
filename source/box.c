@@ -2115,7 +2115,7 @@ void list_brett(short unr, char *board, short von, short bis, short threshold,
 	      if (pwm > MAXPWMODE)
 		pwm	= 0;
 	      if (*header.betreff != '\0' || pwm > 1) {
-		sprintf(hs, "%s-%d-%d", header.absender, strlen(header.betreff), pwm);
+		sprintf(hs, "%s-%zu-%d", header.absender, strlen(header.betreff), pwm);
 		str2file(&pwh, hs, true);
 	      }
 
