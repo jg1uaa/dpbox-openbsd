@@ -1838,7 +1838,7 @@ char *buf;
       iface_list[iface].unproto_rxheader.heardfrom =
           rec_command->data.rxunprotohead.heardfrom;
       nstrcpy(iface_list[iface].unproto_rxheader.qrg,
-          rec_command->data.rxunprotohead.qrg,20);
+          rec_command->data.rxunprotohead.qrg,19);
       memcpy(iface_list[iface].unproto_rxheader.calls,
           rec_command->data.rxunprotohead.calls,DAT_PATHINFO);
       break;
