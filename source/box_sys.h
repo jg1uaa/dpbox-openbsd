@@ -42,7 +42,7 @@ extern void change_mailbeacon(short unr, char *eingabe);
 extern void change_readlock(short unr, char *eingabe);
 extern void change_ttl(short unr, char *eingabe);
 extern void change_startup(short unr, char *eingabe);
-extern void change_mybbs(short unr, char *callx, char *bbs, long updatetime,
+extern void change_mybbs(short unr, char *callx, char *bbs, time_t updatetime,
 			 char *level, char mybbsmode, boolean update, boolean fwd);
 extern void change_levels(short unr, short cnr, char *callx, short lvl);
 extern void change_name(short unr, char *callx, char *w);

@@ -1375,7 +1375,7 @@ void change_name(short unr, char *callx, char *w_)
 static boolean chmbxsemaphore;
 
 
-void change_mybbs(short unr, char *callx_, char *bbs_, long updatetime,
+void change_mybbs(short unr, char *callx_, char *bbs_, time_t updatetime,
 		  char *level_, char mybbsmode, boolean update, boolean fwd)
 {
   short		x, mssid;
