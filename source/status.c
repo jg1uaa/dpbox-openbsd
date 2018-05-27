@@ -412,7 +412,7 @@ void get_status(boolean sysop, char **p, long *sz)
   pl("");
   sprintf(hs, "date             : %s %s", clock_.datum4, clock_.zeit);
   pl(hs);
-  sprintf(hs, "ixtime           : %ld sec. since 1.1.1970", clock_.ixtime);
+  sprintf(hs, "ixtime           : %"PRId64" sec. since 1.1.1970", clock_.ixtime);
   pl(hs);
   get_boxruntime_s(1, STR1);
   sprintf(hs, "dpbox runtime    : %s", STR1);
