@@ -19,7 +19,7 @@
 #include "boxlocal.h"
 #include "tools.h"
 
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
 #include <ctype.h>
 #include <sys/time.h>
 #include <sys/resource.h>
@@ -80,7 +80,7 @@ long statclock(void)
 #endif
 }
 
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
 
 long get_cpuusage(void)
 {
