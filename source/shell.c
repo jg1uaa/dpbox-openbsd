@@ -440,7 +440,7 @@ boolean cmd_shell(short unr, boolean transparent)
     printf("\n"); /* leading newline nun ueber tty */
     execl("/bin/sh","/bin/sh","-login",(char *) 0);
     sprintf(slave, "shell (/bin/sh) not found (!?)\n");
-    printf(slave);
+    printf("%s", slave);
     append_profile(-1, slave);
     exit(1);
   }
