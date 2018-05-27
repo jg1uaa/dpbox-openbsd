@@ -26,6 +26,7 @@ documentation and/or software.
  */
 
 #include "md2md5.h"
+#include <string.h>
 
 /* PROTOTYPES should be set to one if and only if the compiler supports
   function argument prototyping.
