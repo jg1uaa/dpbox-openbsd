@@ -776,7 +776,7 @@ typedef struct drect {
   char mybbs[7];
   char name[16];
   short level, pwmode;
-  long mybbsupd;
+  time_t mybbsupd;
 } drect;
 
 
