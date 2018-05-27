@@ -110,7 +110,7 @@ extern void PrepareFuzzySearch(char *SearchStr, char *NormalisedStr,
 extern boolean check_other_callsyntax(char *syntax);
 
 #define sys_ixtime() time(NULL)
-#define compare(w, cmd) (*w && (strstr(cmd, w) == cmd))
+#define compare(w, cmd) (*w && (strstr((const char *)cmd, w) == (const char *)cmd))
 #define conv_file_to_local(fname) conv_file_umlaut(true, fname)
 #define conv_file_from_local(fname) conv_file_umlaut(false, fname)
 
