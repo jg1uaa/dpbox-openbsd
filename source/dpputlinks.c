@@ -171,7 +171,7 @@ DIGI........4 DIVERSES....1 MANUAL......6 STATISTI....2
       *t = '\0';
       if (strlen(hs) > 10) {
         strncpy(board, hs, 8);
-        board[9] = '\0';
+        board[8] = '\0';
         t = strchr(board, '.');
         if (t != NULL) *t = '\0';
         sprintf(link, "<A HREF=\042%s?%s%%201-\042>", dplist, board);
