@@ -565,7 +565,7 @@ static void conc_date(boolean datum, char sep, unsigned short date, char *s)
 
 static void make_sortdate(unsigned short date, unsigned short time, char *s)
 {
-  sprintf(s, "%.10ld", dos2ixtime(date, time));
+  sprintf(s, "%.10"PRId64, dos2ixtime(date, time));
 }
 
 
