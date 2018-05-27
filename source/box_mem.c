@@ -334,7 +334,7 @@ static void load_bidhash(void)
   boxendbusy();
 }
 
-#undef bsize;
+#undef bsize
 
 static long find_bidhash(char *bid)
 {
