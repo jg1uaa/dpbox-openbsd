@@ -839,7 +839,7 @@ boolean update_mybbsfile(boolean by_usercommand, char *call_, time_t *updatetime
 	}
       }
     } else {
-      sprintf(STR1, "corrupted M-forward-date : %s@%s stamp:%ld mytime:%ld",
+      sprintf(STR1, "corrupted M-forward-date : %s@%s stamp:%"PRId64" mytime:%"PRId64,
 	      call, mybbs, *updatetime, clock_.ixtime);
       append_profile(-1, STR1);
     }
