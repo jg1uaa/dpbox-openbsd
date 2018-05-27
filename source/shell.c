@@ -270,7 +270,7 @@ void set_dpbox_environment(short unr)
     setenv("DPBOXBOARD", WITH->brett, true);
     ix2string(WITH->lastdate, w);
     setenv("DPBOXLASTDATE", w, true);
-    sprintf(w, "%ld", WITH->lastdate);
+    sprintf(w, "%"PRId64, WITH->lastdate);
     setenv("DPBOXIXLASTDATE", w, true);
     if (WITH->se_ok)
       strcpy(w, "1");
