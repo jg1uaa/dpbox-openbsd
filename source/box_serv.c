@@ -1018,7 +1018,7 @@ boolean config_server(short unr, char *eingabe_)
      switch (w[1]) {
 
      case '+':
-       if (toggle_pubserv(unr, sname, 1, '\0')) {
+       if (toggle_pubserv(unr, sname, 1, NULL)) {
          sprintf(STR1, "OK, server %s is now public", sname);
          wlnuser(unr, STR1); 
        } else {
@@ -1029,7 +1029,7 @@ boolean config_server(short unr, char *eingabe_)
        break;
 
      case '-':
-       if (toggle_pubserv(unr, sname, 2, '\0')) {
+       if (toggle_pubserv(unr, sname, 2, NULL)) {
          sprintf (STR1, "OK, server %s is now private", sname);
          wlnuser(unr, STR1);      
        } else {
