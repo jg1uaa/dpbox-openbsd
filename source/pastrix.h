@@ -76,7 +76,7 @@
 #include <sys/time.h>
 #endif
 
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
 #include <signal.h>
 #define DP_SIGHUP SIGHUP
 #define DP_SIGTSTP SIGTSTP
@@ -181,7 +181,7 @@ extern long memavail__(void);
 #endif
 #define move_b(quelle, ziel, size) memmove(ziel, quelle, size)
 
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
 extern long get_cpuusage(void);
 extern long get_memusage(void);
 #else
