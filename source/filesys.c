@@ -1121,7 +1121,7 @@ static void flockp2s(flocktype *hp, char *hs)
   else
     c = 'r';
 
-  sprintf(hs, "%3d %c %.2ld:%.2ld %s", hp->handle, c, t2 / 60, t2 % 60, hp->name);
+  sprintf(hs, "%3d %c %.2"PRId64":%.2"PRId64" %s", hp->handle, c, t2 / 60, t2 % 60, hp->name);
 }
 
 
