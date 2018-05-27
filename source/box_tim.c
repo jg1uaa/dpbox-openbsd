@@ -1045,7 +1045,7 @@ static boolean test_correct_clock(void)
 
 /* tct is a counter with TICKSPERSEC Hz (at least 200)	*/
 
-void box_timing2(long tct)
+void box_timing2(time_t tct)
 {
   static short		lastbatchhour	= -1;
   static long	 	ltc1		= 0;
