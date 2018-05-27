@@ -583,7 +583,7 @@ char upcase_(register char ch)
 
 void upper(char *s)
 {
-  while ((*s++ = upcase_(*s)));
+  for (; (*s = upcase_(*s)); s++);
 }
 
 void strcpyupper(char *outs, char *ins)
@@ -593,7 +593,7 @@ void strcpyupper(char *outs, char *ins)
 
 void lower(char *s)
 {
-  while ((*s++ = lowcase(*s)));
+  for (; (*s = lowcase(*s)); s++);
 }
 
 void strcpylower(char *outs, char *ins)
