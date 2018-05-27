@@ -372,7 +372,8 @@ int my_exec1(char *s, int hang)
     	strcpy(fname, token);
 	args[0] = fname;
     	ct = 1;
-	while ((args[ct] = strtok(NULL, " \t")) != NULL && ct++ < maxrunargs);
+	while ((args[ct] = strtok(NULL, " \t")) != NULL && ct++ < maxrunargs)
+	  ;
     	execvp(fname, args);
         sprintf(command, "exec: %s not found", fname);
         append_profile(-1, command);
