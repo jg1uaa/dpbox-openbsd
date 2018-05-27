@@ -638,7 +638,7 @@ static void open_sendfile(short unr)
 	if (!WITH->is_authentic) {
 	  if (holddelay > 0) {
 	    w_btext(unr, 109);
-	    sprintf(w, " %ld", holddelay / 3600);
+	    sprintf(w, " %"PRId64, holddelay / 3600);
 	    wlnuser(unr, w);
 	  }
 	}
