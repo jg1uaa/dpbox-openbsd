@@ -5,7 +5,7 @@
    updated: Joachim Schurig DL8HBS 99/09/26
 */
 
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

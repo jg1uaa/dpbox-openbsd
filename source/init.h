@@ -33,7 +33,7 @@
 #define DEF_SAVEDIR "save/"
 #define DEF_SERVERDIR "server/"
 
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__OpenBSD__)
   #define DEF_BOXPROCDIR "/var/run/"
   #define DEF_BOXSOCKDIR "/var/run/"
 #else /* Have to preserve the old setting for running installations */
