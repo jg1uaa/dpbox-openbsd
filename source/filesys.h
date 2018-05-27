@@ -177,7 +177,7 @@ extern long sfwrite(short handle, long count, const char *buf);
 extern void sfclose_x(short *handle, boolean delete_it);
 extern void sfdelfile(char *name);
 extern void sfdispfilelist(short x, dispfilelistproc outproc);
-extern void chkopenfiles(long maxopen, char *fn); /* maxopen in sekunden */
+extern void chkopenfiles(time_t maxopen, char *fn); /* maxopen in sekunden */
 extern short fmv_x(char *filea, char *fileb, boolean delete_source,
 		       long start, long size, boolean was_rename);
 extern boolean tas_lockfile(long waittime, long oldtime, char *name);
