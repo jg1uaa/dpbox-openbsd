@@ -5211,7 +5211,7 @@ void set_sfparms(char *box, char *hs_)
 static void form_utc(time_t time, char *out)
 {
   time /= 60;
-  sprintf(out, "%.2ld%.2ld", time / 60, time % 60);
+  sprintf(out, "%.2"PRId64"%.2"PRId64, time / 60, time % 60);
 }
 
 
