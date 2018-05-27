@@ -13,19 +13,14 @@
 #define DP_VNR_SUB	".00"
 
 
-#ifdef __macos__
-#undef IFACE_DEBUG
-#endif
-#ifdef __linux__
-#undef IFACE_DEBUG
-#endif
-#ifdef __NetBSD__
+#if defined(__macos__) || defined(__linux__) || \
+	defined(__NetBSD__) || defined(__OpenBSD__)
 #undef IFACE_DEBUG
 #endif
 
 #define MAIN_G
 
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -2914,31 +2909,24 @@ char *argv[];
   listen(sockfd,5);
 
   /* fcntl(sockfd,F_SETFL,O_NONBLOCK); */
-  
- 
-#ifdef __NetBSD__ 
+#endif
+
+#if defined(__NetBSD__)
   printf("DigiPoint Box v%s%s %s (NetBSD) successfully started\n",
           dp_vnr, dp_vnr_sub, dp_date);
-#define __dp_version_done
-#endif
-#ifdef __linux__
+#elif defined(__OpenBSD__)
+  printf("DigiPoint Box v%s%s %s (OpenBSD) successfully started\n",
+          dp_vnr, dp_vnr_sub, dp_date);
+#elif defined(__linux__)
   printf("DigiPoint Box v%s%s %s (Linux) successfully started\n",
           dp_vnr, dp_vnr_sub, dp_date);
-#define __dp_version_done
-#endif
-
-#endif
-#ifdef __macos__
+#elif defined(__macos__)
   printf("DigiPoint Box v%s%s %s (MacOS) successfully started\n",
           dp_vnr, dp_vnr_sub, dp_date);
-#define __dp_version_done
-#endif
-
-#ifndef __dp_version_done
+#else
   printf("DigiPoint Box v%s%s %s successfully started\n",
           dp_vnr, dp_vnr_sub, dp_date);
 #endif
-#undef __dp_version_done
 
 #ifndef __macos__
   switch (dpbox_debug) {
@@ -3082,7 +3070,7 @@ char *argv[];
       exit_proc();
       if (dpbox_debug == 2)
         fclose(error_fp);
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
       delete_dirlist();
       unlink(serv_addr.sun_path);
 #endif
