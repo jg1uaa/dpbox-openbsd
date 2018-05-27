@@ -1,6 +1,6 @@
 /* ---- shell functs, stolen from TNT / Mark Wahl, DL4YBG ----- */
 
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -231,7 +231,7 @@ boolean close_shell(short unr)
       	trans_show_puffer(unr,user[unr]->ptybuffer,user[unr]->ptybuflen);
     }
     if (user[unr]->pty >= minhandle) {
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__OpenBSD__)
       ioctl(user[unr]->pty, TCIOFLUSH, 2);
 #else
       ioctl(user[unr]->pty, TCFLSH, 2);
@@ -415,7 +415,7 @@ boolean cmd_shell(short unr, boolean transparent)
     if (user[unr]->ptylfcrconv) {
       memset((char *) &termios, 0, sizeof(termios));
       termios.c_iflag = ICRNL | IXOFF;
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__OpenBSD__)
       termios.c_oflag = OPOST | OXTABS | ONLRET;
 #else
       termios.c_oflag = OPOST | TAB3 | ONLRET;
@@ -485,7 +485,7 @@ boolean cmd_run(short unr, boolean transparent, char *command, char *ofi, char *
     if (user[unr]->ptylfcrconv) {
       memset((char *) &termios, 0, sizeof(termios));
       termios.c_iflag = ICRNL | IXOFF;
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__OpenBSD__)
       termios.c_oflag = OPOST | OXTABS | ONLRET;
 #else
       termios.c_oflag = OPOST | TAB3 | ONLRET;
