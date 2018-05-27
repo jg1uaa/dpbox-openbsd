@@ -71,7 +71,7 @@ extern void mktemp(char *name);
 
 
 
-#if defined(__linux__) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__NetBSD__) || defined(__OpenBSD__)
 
 /* simply copied that widespread file access code of former dpbox code  */
 /* in this single file. Not a real change to previous versions of the   */
@@ -79,7 +79,7 @@ extern void mktemp(char *name);
 /* localisation of the dpbox code from Atari to Linux                   */
 
 #include <sys/stat.h>
-#ifndef __NetBSD__
+#if defined(__linux__)
 #include <sys/vfs.h>
 #endif
 
