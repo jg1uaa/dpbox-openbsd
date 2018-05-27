@@ -1656,37 +1656,36 @@ void show_version(short unr, boolean extended)
   char		hs[256];
 
   if (!extended) {
-#undef __dp_version_ok
-#ifdef __macos__
+#if defined(__macos__)
     sprintf(hs, "dpbox (MacOS) v%s%s %s", dp_vnr, dp_vnr_sub, dp_date);
     wuser(unr, hs);
     wlnuser(unr, " (c) 1990-2000 Joachim Schurig, DL8HBS");
     wlnuser(unr, "parts of the code: (c) 1994-1997 Mark Wahl, DL4YBG");
-#define __dp_version_ok
-#endif
-#ifdef __linux__
+#elif defined(__linux__)
     sprintf(hs, "dpbox (Linux) v%s%s %s", dp_vnr, dp_vnr_sub, dp_date);
     wuser(unr, hs);
     wlnuser(unr, " (c) 1990-2000 Joachim Schurig, DL8HBS");
     wlnuser(unr, "Linux porting  : (c) 1994-1997 Mark Wahl, DL4YBG");
-#define __dp_version_ok
-#endif
-#ifdef __NetBSD__
+#elif defined(__NetBSD__)
     sprintf(hs, "dpbox (NetBSD) v%s%s %s", dp_vnr, dp_vnr_sub, dp_date);
     wuser(unr, hs);
     wlnuser(unr, " (c) 1990-2000 Joachim Schurig, DL8HBS");
     wlnuser(unr, "Linux porting  : (c) 1994-1997 Mark Wahl, DL4YBG");
     wlnuser(unr, "NetBSD porting : (c) 1999 Berndt Josef Wulf, VK5ABN");
-#define __dp_version_ok
-#endif
-#ifndef __dp_version_ok
+#elif defined(__OpenBSD__)
+    sprintf(hs, "dpbox (OpenBSD) v%s%s %s", dp_vnr, dp_vnr_sub, dp_date);
+    wuser(unr, hs);
+    wlnuser(unr, " (c) 1990-2000 Joachim Schurig, DL8HBS");
+    wlnuser(unr, "Linux porting   : (c) 1994-1997 Mark Wahl, DL4YBG");
+    wlnuser(unr, "NetBSD porting  : (c) 1999 Berndt Josef Wulf, VK5ABN");
+    wlnuser(unr, "OpenBSD porting : (c) 2018 Sasano Takayoshi, JG1UAA");
+#else
     sprintf(hs, "dpbox v%s%s %s", dp_vnr, dp_vnr_sub, dp_date);
     wuser(unr, hs);
     wlnuser(unr, " (c) 1990-2000 Joachim Schurig, DL8HBS");
     wlnuser(unr, "Linux porting  : (c) 1994-1997 Mark Wahl, DL4YBG");
     wlnuser(unr, "NetBSD porting : (c) 1999 Berndt Josef Wulf, VK5ABN");
 #endif
-#undef __dp_version_ok
 
     wuser(unr, "dpbox runtime  : ");
     get_boxruntime_s(1, hs);
