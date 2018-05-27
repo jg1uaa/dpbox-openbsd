@@ -1365,7 +1365,7 @@ void load_userfile(boolean only_m, boolean with_ext_strings, char *calls, userst
       strcpy(rec->call, hp->absender);
       strcpy(rec->mybbs, hp->verbreitung);
       strcpy(rec->language, hp->id);
-      cut(hp->dest, 80);
+      cut(hp->dest, 8);
       strcpy(rec->name, hp->dest);
       strcpy(rec->password, hp->betreff);
       rec->lastdate	= hp->rxdate;
