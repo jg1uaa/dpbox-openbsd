@@ -82,7 +82,7 @@ void linpack(char *outs) /* was main */
 {
 	static REAL aa[200][200],a[200][201],b[200],x[200];
 	REAL cray,ops,total,norma,normx;
-	REAL resid,residn,eps,t1,tm,tm2;
+	REAL resid,t1,tm,tm2;
 	REAL epslon(),second(),kf;
 	static int ipvt[200],n,i,ntimes,info,lda,ldaa,kflops;
 
@@ -120,8 +120,6 @@ void linpack(char *outs) /* was main */
             	normx = (normx > fabs((double)x[i])) 
 			? normx : fabs((double)x[i]);
 	}
-        eps = epslon((REAL)ONE);
-        residn = resid/( n*norma*normx*eps );
 	
         time[2][0] = total;
         time[3][0] = ops/(1.0e3*total);
