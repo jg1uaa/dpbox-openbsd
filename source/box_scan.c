@@ -644,14 +644,12 @@ boolean scan_for_ack(char *puffer, long size, boolean wpupdate,
 {
   short		x, lct, lastrl, a, extracthandle;
   boolean	rok, priv, is_ack;
-  long		binstart; /* now a dummy value */
   long		rp, lp, lp2, li;
   time_t	txdate;
   pathstr	extractname;
   char		hs[1000], w[256], shs[256], hsu[256];
   calltype	actwpfilesender;
 
-  binstart	= 0;
   *is_binary	= false;
   *is_7plus	= false;
   is_ack	= false;
@@ -742,7 +740,6 @@ boolean scan_for_ack(char *puffer, long size, boolean wpupdate,
 
     if (hs[0] == '#' && hs[1] == 'B' && true_bin(hs) >= 0) {
       *is_binary	= true;
-      binstart		= rp;
       if (!autobinextract || part)
 	continue;
 
@@ -787,7 +784,6 @@ boolean scan_for_ack(char *puffer, long size, boolean wpupdate,
     
       if (strstr(hs, " go_7+. ") == hs) {
 	*is_7plus		= true;
-	binstart		= rp;
 	a			= 0;
 	cut(hs, 255);
 	if (auto7plusextract && !part) {
@@ -802,7 +798,6 @@ boolean scan_for_ack(char *puffer, long size, boolean wpupdate,
       	cut(hs, 255);
 	if (uspos(".ERR", hs) > 0) {
 	  *is_7plus	= true;
-	  binstart	= rp;
 	  a		= 1;
 	  continue;
 	}
@@ -811,7 +806,6 @@ boolean scan_for_ack(char *puffer, long size, boolean wpupdate,
 	  continue;
 
 	*is_7plus		= true;
-	binstart		= rp;
 	a 		= 1;
 	if (auto7plusextract && !part) {
 	  priv 		= (strcmp(Console_call, board) == 0);
