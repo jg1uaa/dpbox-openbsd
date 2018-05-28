@@ -506,7 +506,7 @@ void show_routing_stat(short unr, char *call, char *options, rsoutputproc out)
 {
   short       	action, x, y;
   boolean     	mtdefault;
-  time_t      	lasttime, mintime, maxtime, xstep, xtime;
+  time_t      	lasttime, mintime, maxtime, xstep;
   short       	handle;
   unsigned long minqual, maxqual, ystep, cury, avgqual, avgct;
   routstattype	rss;
@@ -580,7 +580,6 @@ void show_routing_stat(short unr, char *call, char *options, rsoutputproc out)
     }
     avgqual   	= 0;
     avgct     	= 0;
-    xtime     	= mintime;
     xstep     	= (maxtime - mintime) / CHARTX;
     if (xstep < 1) xstep = 1;
     ystep     	= (maxqual - minqual) / (CHARTY-1);
