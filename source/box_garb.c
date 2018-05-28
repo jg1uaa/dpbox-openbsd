@@ -560,7 +560,7 @@ static short retmailinf(indexstruct *hptr, boolean unread, boolean unknown)
   str2file(&k, hs, true);
   sprintf(hs, "Your subject : %s", hptr->betreff);
   str2file(&k, hs, true);
-  sprintf(w, "%ld", (clock_.ixtime - hptr->rxdate) / SECPERDAY);
+  sprintf(w, "%"PRId64, (clock_.ixtime - hptr->rxdate) / SECPERDAY);
   if (unread || unknown)
     sprintf(hs, "Deleted after: %s days", w);
   else
