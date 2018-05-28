@@ -58,7 +58,7 @@ static short set_wprot_r(char *p, wprottype *wpb) {
   if (!valid_wprot_timestamp(wpb->timestamp)) return -1;
   if (wpb->hops < 0) return -1;
   if (wpb->hops > MAXWPHOPS) return -1;
-  snprintf(p, 999, "   R %s %ld %ld %d %ld",
+  snprintf(p, 999, "   R %s %ld %"PRId64" %d %ld",
     	   wpb->call, wpb->version, wpb->timestamp, wpb->hops+1, wpb->quality);
   set_wprot_checksum(p);
   return 0;
@@ -147,7 +147,7 @@ static short set_wprot_b(char *p, wprottype *wpb) {
   if (!*proto) strcpy(proto, "?");
   nstrcpy(hwadr, wpb->hwadr, 80);
   if (!*hwadr) strcpy(hwadr, "?");
-  snprintf(p, 255, "   B %s %ld %u %s %s %s %ld %d",
+  snprintf(p, 255, "   B %s %ld %u %s %s %s %"PRId64" %d",
     	   wpb->bbs, wpb->version, wpb->status, sysop, proto, hwadr, wpb->timestamp, wpb->hops+1);
   set_wprot_checksum(p);
   return 0;
@@ -269,7 +269,7 @@ static short set_wprot_m(char *p, wprottype *wpb) {
   nstrcpy(qth, wpb->qth, 80);
   if (!*qth) strcpy(qth, "?");
   else if (count_words(qth) > 1) caps_string(qth);
-  snprintf(p, 255, "   M %s %s %s %ld %s %d %s %s %s",
+  snprintf(p, 255, "   M %s %s %s %"PRId64" %s %d %s %s %s",
       	   wpb->call, wpb->bbs, bid, wpb->timestamp, origin, wpb->hops+1, name, zip, qth);
   set_wprot_checksum(p);
   return 0;
@@ -620,7 +620,7 @@ void show_routing_stat(short unr, char *call, char *options, rsoutputproc out)
       case 0    : if (avgct > 0) avgqual = avgqual / avgct;
 		  ix2string4(mintime, w);
 		  ix2string4(maxtime, w2);
-		  snprintf(hs, 200, " %*s : %s - %s / %ldh %ldm avgqual %ld",
+		  snprintf(hs, 200, " %*s : %s - %s / %"PRId64"h %"PRId64"m avgqual %ld",
 		      	   LEN_CALL, call, w, w2, xstep / (60 * 60), (xstep % (60 * 60)) / 60, avgqual);
 		  out(unr, hs);
 		  out(unr, "");
@@ -746,7 +746,7 @@ static void create_em_message(wprottype *wpb)
     strcpy(header.betreff, wpb->erasebid);
   } else { /* M messages */
     strcpy(header.verbreitung, e_m_verteiler);
-    snprintf(hs, LEN_SUBJECT, "%s %ld", wpb->bbs, wpb->timestamp);
+    snprintf(hs, LEN_SUBJECT, "%s %"PRId64, wpb->bbs, wpb->timestamp);
     strcpy(header.betreff, hs);
   }
 
@@ -780,7 +780,7 @@ void add_wprotline(wprottype *wpb, boolean meta)
 
   switch (wpb->which) {
     case 'M' : 	if (set_wprot_m(hs, wpb) < 0) return;
-      	      	snprintf(sl, wpbhlen+1, "M/%-*s %10ld %-*s ", LEN_CALL, wpb->call, wpb->timestamp, LEN_CALL, wpb->rxfrom);
+      	      	snprintf(sl, wpbhlen+1, "M/%-*s %10"PRId64" %-*s ", LEN_CALL, wpb->call, wpb->timestamp, LEN_CALL, wpb->rxfrom);
 		nstrcat(sl, hs, 255);
 		break;
     case 'E' :  if (set_wprot_e(hs, wpb) < 0) return;
@@ -790,7 +790,7 @@ void add_wprotline(wprottype *wpb, boolean meta)
       	      	nstrcat(sl, hs, 255);
       	      	break;
     case 'B' :  if (set_wprot_b(hs, wpb) < 0) return;
-      	      	snprintf(sl, wpbhlen+1, "B/%-*s %10ld %-*s ", LEN_CALL, wpb->call, wpb->timestamp, LEN_CALL, wpb->rxfrom);
+      	      	snprintf(sl, wpbhlen+1, "B/%-*s %10"PRId64" %-*s ", LEN_CALL, wpb->call, wpb->timestamp, LEN_CALL, wpb->rxfrom);
       	      	nstrcat(sl, hs, 255);
       	      	break;
     case 'R' :  if (!do_wprot_routing && !meta) return;
@@ -799,7 +799,7 @@ void add_wprotline(wprottype *wpb, boolean meta)
       	      	cur_ixtime = clock_.ixtime;
       	      	if (cur_ixtime <= last_ixtime) cur_ixtime = last_ixtime + 1;
       	      	last_ixtime = cur_ixtime;
-      	      	snprintf(sl, wpbhlen+1, "R/%-*s %10ld %-*s ", LEN_CALL, wpb->call, cur_ixtime, LEN_CALL, wpb->rxfrom);
+      	      	snprintf(sl, wpbhlen+1, "R/%-*s %10"PRId64" %-*s ", LEN_CALL, wpb->call, cur_ixtime, LEN_CALL, wpb->rxfrom);
       	      	nstrcat(sl, hs, 255);
       	      	break;
     default  :	return;
@@ -1191,7 +1191,7 @@ short process_wprotline(char *hs, char *actsender, boolean meta) {
   /* compare checksum with sent checksum */
   hs[2] = '\0';
   if (checksum != hatoi(hs)) {
-    snprintf(w, 200, "invalid wprot checksum: %s (%ld) != %d (meta=%d, len=%d)",
+    snprintf(w, 200, "invalid wprot checksum: %s (%ld) != %d (meta=%d, len=%zu)",
       	      	    hs, hatoi(hs), checksum, meta, strlen(p)+3);
     debug(3, -1, 226, w);
     return -1; /* exit if invalid checksum */
@@ -1424,7 +1424,7 @@ short process_wpline(char *hs, char *actwpfilesender)
   strcpy(qth, hs);   /* info/qth */
   del_lastblanks(qth);
   if (!*qth) return -1; /* must at least be "?" */
-  snprintf(hs, 255, "M @ %s < %s $%s %s %ld %s %s %s",
+  snprintf(hs, 255, "M @ %s < %s $%s %s %"PRId64" %s %s %s",
       	   e_m_verteiler, call, WPDUMMYBID, bbs, time, zip, name, qth);
   sf_rx_emt1(hs, actwpfilesender);
   return 0;
