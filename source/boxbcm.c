@@ -480,10 +480,9 @@ static void convert_sfw(short unr, char *sfw)
   char	*p;
   short ih, oh;
   char ina[256], ona[256];
-  boolean ok, firstline;
+  boolean firstline;
   short lasttyp;
 
-  ok = false;
   iwuser(unr, "opening fwd.bcm ...");
   strcpy(ina, sfw);
   sprintf(w, "%sfwd.tmp", boxsfdir);
@@ -518,7 +517,6 @@ static void convert_sfw(short unr, char *sfw)
       if (oh < minhandle)
         iwlnuser(unr, "cannot create outfile");
       else {
-        ok = true;
         upper(w1);
         *hs = '\0';
         str2file(&oh, hs, true);
