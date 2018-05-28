@@ -2774,10 +2774,8 @@ void switch_to_default_fserv_board(char *rubr)
 
 boolean strip_invalid_boardname_chars(char *rubrik)
 {
-  short x;
   char	*p, *p2, c;
   
-  x   = 0;
   p   = rubrik;
   p2  = rubrik;
   while ((c = upcase_(*p++))) {
