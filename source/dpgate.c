@@ -686,11 +686,10 @@ static int in_args(int argc, char *argv[], char *searched, char *nextarg)
 
 static void convert_cgi_command(char *s)
 {
-  int x, changed, r;
+  int changed, r;
   char out[256], h[3], *o, *i;
   
   changed = 0;
-  x = 0;
   o = out;
   i = s;
   while (*i) {
