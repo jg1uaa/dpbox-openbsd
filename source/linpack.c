@@ -73,7 +73,6 @@ static void daxpy (int n,REAL da,REAL dx[],int incx,REAL dy[],int incy);
 static REAL ddot (int n,REAL dx[],int incx,REAL dy[],int incy);
 static void dscal( int n,REAL da,REAL dx[],int incx);
 static int idamax (int n,REAL dx[],int incx);
-static REAL epslon (REAL x);
 static void dmxpy (int n1, REAL y[], int n2, int ldm, REAL x[], REAL m[]);
 static REAL second();
 /*************/
@@ -83,7 +82,7 @@ void linpack(char *outs) /* was main */
 	static REAL aa[200][200],a[200][201],b[200],x[200];
 	REAL cray,ops,total,norma,normx;
 	REAL resid,t1,tm,tm2;
-	REAL epslon(),second(),kf;
+	REAL second(),kf;
 	static int ipvt[200],n,i,ntimes,info,lda,ldaa,kflops;
 
 	lda = 201;
@@ -727,53 +726,6 @@ int incx,n;
 	return (itemp);
 }
 
-/*----------------------*/ 
-static REAL epslon (x)
-REAL x;
-/*
-     estimate unit roundoff in quantities of size x.
-*/
-
-{
-	REAL a,b,c,eps;
-/*
-     this program should function properly on all systems
-     satisfying the following two assumptions,
-        1.  the base used in representing dfloating point
-            numbers is not a power of three.
-        2.  the quantity  a  in statement 10 is represented to 
-            the accuracy used in dfloating point variables
-            that are stored in memory.
-     the statement number 10 and the go to 10 are intended to
-     force optimizing compilers to generate code satisfying 
-     assumption 2.
-     under these assumptions, it should be true that,
-            a  is not exactly equal to four-thirds,
-            b  has a zero for its last bit or digit,
-            c  is not exactly equal to one,
-            eps  measures the separation of 1.0 from
-                 the next larger dfloating point number.
-     the developers of eispack would appreciate being informed
-     about any systems where these assumptions do not hold.
-
-     *****************************************************************
-     this routine is one of the auxiliary routines used by eispack iii
-     to avoid machine dependencies.
-     *****************************************************************
-
-     this version dated 4/6/83.
-*/
-
-	a = 4.0e0/3.0e0;
-	eps = ZERO;
-	while (eps == ZERO) {
-		b = a - ONE;
-		c = b + b + b;
-		eps = fabs((double)(c-ONE));
-	}
-	return(eps*fabs((double)x));
-}
- 
 /*----------------------*/ 
 static void dmxpy (n1, y, n2, ldm, x, m)
 REAL y[], x[], m[];
