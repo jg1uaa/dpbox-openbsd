@@ -194,7 +194,7 @@ static boolean generate_linkcheck_data(short unr)
 /*
     write_msgid(-1, bid);
 */
-    snprintf(user[unr]->fbbprop[x].line, 255, "%s P %s %s %s %s 1000",
+    snprintf(user[unr]->fbbprop[x].line, 81, "%s P %s %s %s %s 1000",
       	      hs, Console_call, bcall, user[unr]->call, bid);
   }
   calc_prop_crc(unr, hs);
@@ -6212,7 +6212,7 @@ boolean gen_sftest(short unr, char *eingabe)
       user_mybbs(rubrik, mbx);
   }
   add_hpath(mbx);
-  snprintf(STR7, 255, "%s @ %s", rubrik, mbx);
+  snprintf(STR7, 100, "%s @ %s", rubrik, mbx);
   wlnuser(unr, STR7);
   return (gen_sftest2(unr, rubrik, mbx));
 }
