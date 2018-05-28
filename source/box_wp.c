@@ -891,7 +891,7 @@ void sf_rx_emt1(char *eingabe, char *actwpfilesender)
   if (wpb.which == 'E') { /* erasebid */
     if (strlen(w) > LEN_BID) return;
     nstrcpy(wpb.erasebid, w, LEN_BID);
-    nstrcpy(wpb.issuer, wpb.call, LEN_BID);
+    nstrcpy(wpb.issuer, wpb.call, LEN_CALL);
   } else { /* mybbs */
     if (strlen(w) > LEN_MBX) return;
     unhpath(w, hs);
