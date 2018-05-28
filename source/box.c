@@ -1176,7 +1176,7 @@ unsigned short read_brett(short unr, short outch, char *board, short von,
 {
   short			outchan, ct, bbsmode, ki, kx, ka, ko, unpackerr, lv, i, rcount;
   boolean		ok, sf, sf_pack, valid, sf_ishuff, rheader, loginsearch;
-  boolean		is_binary, bcast, is_call, export, crawler, hidflag;
+  boolean		is_binary, bcast, is_call, export, hidflag;
   boolean		add_lt, inc_read, fill_readlog, bidsearch, check_readday;
   boolean		with_readers, only_headers, ack_msg, none_displayed;
   boolean		check_rcount, readday_ok, wcsearch, ownboard, tpksf;
@@ -1201,7 +1201,6 @@ unsigned short read_brett(short unr, short outch, char *board, short von,
 
   rheader		= (strchr(option, '+') != NULL);
   bcast			= (strchr(option, 'B') != NULL);
-  crawler		= (strchr(option, 'C') != NULL);
   bidsearch		= (strchr(option, '$') != NULL);
   with_readers		= (strchr(option, ':') != NULL);
   only_headers		= (strchr(option, '=') != NULL);
@@ -3977,7 +3976,7 @@ boolean select_file(short unr, char *pfad, char *name, char *titel)
 void export_brett(short unr, char *brett, short s, short e, short threshold,
 		  char *option1, char *search, char *fname)
 {
-  boolean	ok, sf;
+  boolean	sf;
   short		olda, handle;
   indexstruct	lheader;
   pathstr	exname, pfad, name;
@@ -3986,7 +3985,6 @@ void export_brett(short unr, char *brett, short s, short e, short threshold,
   debug(2, unr, 51, brett);
 
   strcpy(name, fname);
-  ok	= true;
   sf	= user[unr]->f_bbs;
   strcpy(option, option1);
 
@@ -4566,7 +4564,6 @@ static boolean set_reply_address(boolean for_comment, short unr,
 				 char *eingabe, char *hs, char *msgtype)
 {
   boolean	Result;
-  userstruct	*WITH;
   indexstruct	rep_header;
   calltype	rep_call;
   boardtype	rep_brett;
@@ -4579,7 +4576,6 @@ static boolean set_reply_address(boolean for_comment, short unr,
   if (!get_reply_info(unr, eingabe, &rep_header))
     return Result;
 
-  WITH = user[unr];
   strcpy(rep_call, rep_header.absender);
   strcpy(rep_brett, rep_header.dest);
   strcpy(rep_title2, rep_header.betreff);
