@@ -153,7 +153,6 @@ Files:
 DIGI........4 DIVERSES....1 MANUAL......6 STATISTI....2
 */
 {
-  int x;
   char link[80], s[256], o[256], board[9], hs[256], *t, *s1;
   
   if (get_line(s)) put_line(s);
@@ -164,7 +163,6 @@ DIGI........4 DIVERSES....1 MANUAL......6 STATISTI....2
     s1 = s;
     while (*s1 != '\0') {
       t = hs;
-      x = 0;
       while (*s1 != ' ' && *s1 != '\n' && *s1 != '\r' && *s1 != '\0') {
         *t++ = *s1++;
       }
