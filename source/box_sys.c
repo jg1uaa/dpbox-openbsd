@@ -2329,7 +2329,6 @@ void stelle_uhr(char *eingabe, boolean datum)
 {
   static est est1 = ".", est2 = "/", est3 = ":", est4 = "-";
 
-  short	h, m, s;
   char	w[256];
   char	datestr[256];
 
@@ -2340,17 +2339,8 @@ void stelle_uhr(char *eingabe, boolean datum)
   ersetze(est4, "  ", datestr);
   get_word(datestr, w);
   if (*w != '\0') {
-    h = atoi(w);
     get_word(datestr, w);
-    m = atoi(w);
     get_word(datestr, w);
-    s = atoi(w);
-/*
-    if (datum)
-      dpsetdate(s + 1900, m, h);
-    else
-      dpsettime(h, m, s);
-*/
   }
 
   utc_clock();
