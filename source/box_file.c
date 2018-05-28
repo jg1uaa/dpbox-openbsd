@@ -2488,7 +2488,6 @@ static void new_entry(short unr, char *dname1_, char *status_, char *betreff1,
   boolean	ack_requested, compress, is_html, dirty, part, db, ok, usersf;
   boolean	hmbxiscall, dirtys, ugzip, is_broken;
   long		nsize, psize, bct, lastpos1, lastpos2, sv, hsize, rs, li;
-  long		lesezeiger1;
   time_t	chargedate, txdate1;
   boolean	wpupdate, outdated, reject_it, hold_it, dbimport, dbimpfilter;
   boolean     	wprotupdate, direct_sf;
@@ -2537,7 +2536,6 @@ static void new_entry(short unr, char *dname1_, char *status_, char *betreff1,
   lastvias[0]	= '\0';
   dirtystring[0]= '\0';
   chargedate	= 0;
-  lesezeiger1	= lesezeiger;
   compress	= (size1 - lesezeiger >= PACKMIN && packdelay == 0);
 
   if (sfcut)
