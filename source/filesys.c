@@ -1193,12 +1193,11 @@ short dpsyscreate(char *fname, int flags, int mode)
 
 short open_locked(boolean create, char *name, short mode)
 {
-  short Result, handle;
+  short handle;
   flocktype *hp;
   boolean nowrite, wantwrite;
   char tcs;
 
-  Result = nohandle;
   tcs = calccs(name);
   handle = nohandle;
   wantwrite = (create || mode != FO_READ);
