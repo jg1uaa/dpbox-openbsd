@@ -363,7 +363,6 @@ void get_status(boolean sysop, char **p, long *sz)
 {
   char hs[256], w[256], STR1[256];
   short s1, s2, s3;
-  boolean owner;
 
 #ifdef DPDEBUG
 #ifdef __GLIBC__
@@ -375,9 +374,7 @@ void get_status(boolean sysop, char **p, long *sz)
 
   if (*p == NULL) {
     *p = malloc(statbufsize);
-    owner = true;
-  } else
-    owner = false;
+  }
 
   if (*p == NULL)
     return;
