@@ -709,14 +709,14 @@ static void delete_invalid_board(char *fname)
 void garbage_collection(boolean xgar, boolean fill_cbyte, boolean check_all,
 			boolean immediate, short unr)
 {
-  indexstruct *hptr, header, *nhptr;
+  indexstruct *hptr, header;
   boxlogstruct blog;
   short kin_index, kout_index, kin_info, kout_info;
   boolean output_opened, m_changed;
   long in_info_size, spos, tomorrowct;
   short ct, k;
   DTA dirinfo;
-  short result, sflfsp, tomorrow;
+  short result, tomorrow;
   boolean garbage_error, ugzip;
   long err = 0;
   long obsolete, dsize;
@@ -730,7 +730,6 @@ void garbage_collection(boolean xgar, boolean fill_cbyte, boolean check_all,
   short kx, k1;
   boolean no_info, unknown_user;
   long diff, packgewinn;
-  char swappart;
   boolean swap_info, swap_index;
   long seconds, tbytes, tmsgs, bps;
   short delct;
@@ -739,7 +738,6 @@ void garbage_collection(boolean xgar, boolean fill_cbyte, boolean check_all,
   long isize;
   short new_ct;
   boolean copied;
-  long lastend;
   boolean from_disk, iscall;
   char fbyte;
   short returnhandle, nhv;
@@ -986,7 +984,6 @@ void garbage_collection(boolean xgar, boolean fill_cbyte, boolean check_all,
 	}
 
 	if (!do_it) {
-	  sflfsp = ct;
 
 	  if (!hptr->deleted) {
 	    ddiff2 = clock_.ixtime - hptr->rxdate;
@@ -1046,7 +1043,6 @@ void garbage_collection(boolean xgar, boolean fill_cbyte, boolean check_all,
     if (do_it) {
       in_info_size = sfsize(oinfname);
       boxsetgdial(xgar, "1", 0, delct, tbytes, tmsgs, bps, "optimizing...");
-      swappart = '0';
     }
 
 
@@ -1063,8 +1059,6 @@ void garbage_collection(boolean xgar, boolean fill_cbyte, boolean check_all,
       k = dsize / sizeof(indexstruct);
 
       new_ct = 0;
-      lastend = 0;
-      nhptr = NULL;
       FORLIM = k;
       for (ct = 1; ct <= FORLIM; ct++) {
 	fbyte = 0;
